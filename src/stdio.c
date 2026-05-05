@@ -60,9 +60,19 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
             continue;
         }
 
-        ++p;
-        if (*p == '\0') {
-            break;
+        p++;
+        if (*p == '\0') break;
+
+        int pad_len = 0;
+        char pad_char = ' ';
+
+        if (*p == '0') {
+            pad_char = '0';
+            p++;
+        }
+        while (*p >= '0' && *p <= '9') {
+            pad_len = pad_len * 10 + (*p - '0');
+            p++;
         }
 
         switch (*p) {
@@ -94,6 +104,12 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
             case 'x': {
                 char buf[32];
                 utoa_base((uint64_t)va_arg(ap, uint32_t), 16u, buf);
+                int len = 0;
+                while (buf[len]) len++;
+                while (len < pad_len) {
+                    sink_putc(&sink, pad_char);
+                    len++;
+                }
                 sink_puts(&sink, buf);
                 break;
             }

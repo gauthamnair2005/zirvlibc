@@ -12,7 +12,9 @@ LIB_NAME := libzirvlibc.a
 SRC := \
 	src/string.c \
 	src/ctype.c \
-	src/stdio.c
+	src/stdio.c \
+	src/syscall.c \
+	src/unistd.c
 
 OBJ := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(SRC))
 

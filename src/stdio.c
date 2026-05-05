@@ -1,6 +1,10 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <zirv/syscall.h>
+
+/* Forward declaration of unistd wrappers */
+extern int write(int fd, const void *buf, size_t count);
 
 typedef struct {
     char *buf;
@@ -131,3 +135,41 @@ int snprintf(char *str, size_t size, const char *format, ...) {
 
     return ret;
 }
+
+#ifndef KERNEL
+int putchar(int c) {
+    char ch = (char)c;
+    if (write(STDOUT_FILENO, &ch, 1) != 1) {
+        return -1;
+    }
+    return (unsigned char)ch;
+}
+
+int puts(const char *s) {
+    size_t len = 0;
+    while (s[len]) len++;
+    if (write(STDOUT_FILENO, s, len) != (int)len) return -1;
+    if (putchar('\n') == -1) return -1;
+    return 0;
+}
+
+int vprintf(const char *format, va_list ap) {
+    char buf[1024];
+    int ret = vsnprintf(buf, sizeof(buf), format, ap);
+    if (ret > 0) {
+        write(STDOUT_FILENO, buf, (size_t)ret);
+    }
+    return ret;
+}
+
+int printf(const char *format, ...) {
+    va_list ap;
+    int ret;
+
+    va_start(ap, format);
+    ret = vprintf(format, ap);
+    va_end(ap);
+
+    return ret;
+}
+#endif

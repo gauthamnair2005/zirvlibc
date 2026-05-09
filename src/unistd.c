@@ -31,6 +31,42 @@ void _exit(int status) {
     for (;;) ; /* Should not be reached */
 }
 
+int execve(const char *pathname, char *const argv[], char *const envp[]) {
+    return (int)_syscall3(SYS_EXECVE, (long)pathname, (long)argv, (long)envp);
+}
+
+int getcwd(char *buf, size_t size) {
+    return (int)_syscall2(SYS_GETCWD, (long)buf, (long)size);
+}
+
+int chdir(const char *path) {
+    return (int)_syscall1(SYS_CHDIR, (long)path);
+}
+
 int getpid(void) {
     return (int)_syscall0(SYS_GETPID);
+}
+
+int brk(void *addr) {
+    return (int)_syscall1(SYS_BRK, (long)addr);
+}
+
+void *sbrk(intptr_t increment) {
+    uintptr_t cur = (uintptr_t)_syscall1(SYS_BRK, 0);
+    if (cur == (uintptr_t)-1) return (void *)-1;
+    if (increment == 0) return (void *)cur;
+    uintptr_t new = cur + increment;
+    uintptr_t result = (uintptr_t)_syscall1(SYS_BRK, new);
+    if (result == (uintptr_t)-1) return (void *)-1;
+    return (void *)cur;
+}
+
+long mmap(void *addr, size_t length, int prot, int flags, int fd, long offset) {
+    (void)fd;
+    (void)offset;
+    return _syscall4(SYS_MMAP, (long)addr, (long)length, prot, flags);
+}
+
+int munmap(void *addr, size_t length) {
+    return (int)_syscall2(SYS_MUNMAP, (long)addr, (long)length);
 }

@@ -14,7 +14,8 @@ SRC := \
 	src/ctype.c \
 	src/stdio.c \
 	src/syscall.c \
-	src/unistd.c
+	src/unistd.c \
+	src/stdlib.c
 
 OBJ := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(SRC))
 

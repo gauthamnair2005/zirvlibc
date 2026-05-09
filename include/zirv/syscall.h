@@ -13,7 +13,11 @@
 #define SYS_BRK      12
 #define SYS_PIPE     22
 #define SYS_GETPID   39
+#define SYS_EXECVE   59
 #define SYS_EXIT     60
+#define SYS_WAIT4    61
+#define SYS_GETCWD   79
+#define SYS_CHDIR    80
 
 /* ── Standard I/O FDs ────────────────────────────────────────────────────── */
 #define STDIN_FILENO  0
@@ -21,11 +25,15 @@
 #define STDERR_FILENO 2
 
 /* ── Error codes ─────────────────────────────────────────────────────────── */
-#define EBADF   9
+#define ENOENT   2
+#define EBADF    9
+#define ECHILD  10
 #define ENOMEM  12
+#define EACCES  13
 #define EFAULT  14
 #define EINVAL  22
 #define EPIPE   32
+#define ERANGE  34
 #define ENOSYS  38
 
 #endif /* ZIRV_SYSCALL_H */

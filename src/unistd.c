@@ -1,5 +1,6 @@
 #include <zirv/syscall.h>
 #include <stddef.h>
+#include <dirent.h>
 
 /* Forward declarations of internal syscall wrappers from syscall.c */
 extern long _syscall0(long n);
@@ -35,12 +36,20 @@ int execve(const char *pathname, char *const argv[], char *const envp[]) {
     return (int)_syscall3(SYS_EXECVE, (long)pathname, (long)argv, (long)envp);
 }
 
+int getdents(int fd, struct dirent *ents, int count) {
+    return (int)_syscall3(SYS_GETDENTS, fd, (long)ents, count);
+}
+
 int getcwd(char *buf, size_t size) {
     return (int)_syscall2(SYS_GETCWD, (long)buf, (long)size);
 }
 
 int chdir(const char *path) {
     return (int)_syscall1(SYS_CHDIR, (long)path);
+}
+
+uint64_t uptime(void) {
+    return (uint64_t)_syscall0(SYS_UPTIME);
 }
 
 int getpid(void) {

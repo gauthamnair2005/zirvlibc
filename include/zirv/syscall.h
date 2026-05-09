@@ -11,13 +11,17 @@
 #define SYS_MMAP     9
 #define SYS_MUNMAP   11
 #define SYS_BRK      12
+#define SYS_UPTIME   13
 #define SYS_PIPE     22
 #define SYS_GETPID   39
 #define SYS_EXECVE   59
 #define SYS_EXIT     60
 #define SYS_WAIT4    61
-#define SYS_GETCWD   79
-#define SYS_CHDIR    80
+#define SYS_GETDENTS   78
+#define SYS_GETCWD     79
+#define SYS_CHDIR      80
+#define SYS_GETDATETIME 96
+#define SYS_SETDATETIME 97
 
 /* ── Standard I/O FDs ────────────────────────────────────────────────────── */
 #define STDIN_FILENO  0

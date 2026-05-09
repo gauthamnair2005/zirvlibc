@@ -79,3 +79,11 @@ long mmap(void *addr, size_t length, int prot, int flags, int fd, long offset) {
 int munmap(void *addr, size_t length) {
     return (int)_syscall2(SYS_MUNMAP, (long)addr, (long)length);
 }
+
+int reboot(void) {
+    return (int)_syscall0(SYS_REBOOT);
+}
+
+int shutdown(void) {
+    return (int)_syscall0(SYS_SHUTDOWN);
+}

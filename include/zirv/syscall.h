@@ -24,6 +24,8 @@
 #define SYS_SETDATETIME 97
 #define SYS_GETTZ       98
 #define SYS_SETTZ       99
+#define SYS_REBOOT     100
+#define SYS_SHUTDOWN   101
 
 /* ── Standard I/O FDs ────────────────────────────────────────────────────── */
 #define STDIN_FILENO  0

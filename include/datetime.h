@@ -14,5 +14,7 @@ struct datetime {
 
 int getdatetime(struct datetime *dt);
 int setdatetime(const struct datetime *dt);
+int gettz(void);
+int settz(int minutes);
 
 #endif

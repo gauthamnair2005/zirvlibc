@@ -36,21 +36,51 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
         if (*p != '%') { sink_putc(&sink, *p); continue; }
         p++;
         if (*p == '\0') break;
-        if (*p == '0') { while (*p >= '0' && *p <= '9') p++; } /* skip padding for now */
-        if (*p == 'l') p++; /* skip long for now */
-        
+
+        if (*p == '0') {
+            while (*p >= '0' && *p <= '9') p++;
+            if (*p == '\0') break;
+        }
+
+        int long_count = 0;
+        while (*p == 'l') { long_count++; p++; }
+        if (*p == '\0') break;
+
         switch (*p) {
             case 's': sink_puts(&sink, va_arg(ap, const char *)); break;
             case 'd': {
-                int n = va_arg(ap, int);
-                char buf[32]; utoa_base(n < 0 ? -n : n, 10, buf);
+                long n;
+                if (long_count >= 1) n = va_arg(ap, long);
+                else n = va_arg(ap, int);
+                char buf[32];
+                uint64_t abs = n < 0 ? -(uint64_t)n : (uint64_t)n;
+                utoa_base(abs, 10, buf);
                 if (n < 0) sink_putc(&sink, '-');
                 sink_puts(&sink, buf);
                 break;
             }
-            case 'u': { char buf[32]; utoa_base(va_arg(ap, unsigned int), 10, buf); sink_puts(&sink, buf); break; }
-            case 'x': { char buf[32]; utoa_base(va_arg(ap, unsigned int), 16, buf); sink_puts(&sink, buf); break; }
-            case 'p': { char buf[32]; sink_puts(&sink, "0x"); utoa_base((uintptr_t)va_arg(ap, void *), 16, buf); sink_puts(&sink, buf); break; }
+            case 'u': {
+                uint64_t n;
+                if (long_count >= 1) n = va_arg(ap, unsigned long);
+                else n = va_arg(ap, unsigned int);
+                char buf[32]; utoa_base(n, 10, buf);
+                sink_puts(&sink, buf);
+                break;
+            }
+            case 'x': {
+                uint64_t n;
+                if (long_count >= 1) n = va_arg(ap, unsigned long);
+                else n = va_arg(ap, unsigned int);
+                char buf[32]; utoa_base(n, 16, buf);
+                sink_puts(&sink, buf);
+                break;
+            }
+            case 'p': {
+                char buf[32]; sink_puts(&sink, "0x");
+                utoa_base((uint64_t)(uintptr_t)va_arg(ap, void *), 16, buf);
+                sink_puts(&sink, buf);
+                break;
+            }
             case 'c': sink_putc(&sink, (char)va_arg(ap, int)); break;
             case '%': sink_putc(&sink, '%'); break;
             default: sink_putc(&sink, '%'); sink_putc(&sink, *p); break;

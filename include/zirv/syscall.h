@@ -22,6 +22,8 @@
 #define SYS_CHDIR      80
 #define SYS_GETDATETIME 96
 #define SYS_SETDATETIME 97
+#define SYS_GETTZ       98
+#define SYS_SETTZ       99
 
 /* ── Standard I/O FDs ────────────────────────────────────────────────────── */
 #define STDIN_FILENO  0

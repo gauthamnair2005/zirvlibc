@@ -1,8 +1,8 @@
 #include <datetime.h>
 #include <zirv/syscall.h>
 
+extern long _syscall0(long n);
 extern long _syscall1(long n, long a1);
-extern long _syscall2(long n, long a1, long a2);
 
 int getdatetime(struct datetime *dt)
 {
@@ -12,4 +12,14 @@ int getdatetime(struct datetime *dt)
 int setdatetime(const struct datetime *dt)
 {
     return (int)_syscall1(SYS_SETDATETIME, (long)dt);
+}
+
+int gettz(void)
+{
+    return (int)_syscall0(SYS_GETTZ);
+}
+
+int settz(int minutes)
+{
+    return (int)_syscall1(SYS_SETTZ, minutes);
 }

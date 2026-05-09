@@ -37,9 +37,12 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
         p++;
         if (*p == '\0') break;
 
-        if (*p == '0') {
-            while (*p >= '0' && *p <= '9') p++;
-            if (*p == '\0') break;
+        int zero_pad = 0;
+        int width = 0;
+        if (*p == '0') { zero_pad = 1; p++; }
+        while (*p >= '1' && *p <= '9') {
+            width = width * 10 + (*p - '0');
+            p++;
         }
 
         int long_count = 0;
@@ -55,6 +58,11 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
                 char buf[32];
                 uint64_t abs = n < 0 ? -(uint64_t)n : (uint64_t)n;
                 utoa_base(abs, 10, buf);
+                int slen = 0; while (buf[slen]) slen++;
+                int nd = (n < 0) ? 1 : 0;
+                if (zero_pad) {
+                    for (int i = slen + nd; i < width; i++) sink_putc(&sink, '0');
+                }
                 if (n < 0) sink_putc(&sink, '-');
                 sink_puts(&sink, buf);
                 break;
@@ -64,6 +72,10 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
                 if (long_count >= 1) n = va_arg(ap, unsigned long);
                 else n = va_arg(ap, unsigned int);
                 char buf[32]; utoa_base(n, 10, buf);
+                int slen = 0; while (buf[slen]) slen++;
+                if (zero_pad) {
+                    for (int i = slen; i < width; i++) sink_putc(&sink, '0');
+                }
                 sink_puts(&sink, buf);
                 break;
             }
@@ -72,6 +84,10 @@ int vsnprintf(char *str, size_t size, const char *format, va_list ap) {
                 if (long_count >= 1) n = va_arg(ap, unsigned long);
                 else n = va_arg(ap, unsigned int);
                 char buf[32]; utoa_base(n, 16, buf);
+                int slen = 0; while (buf[slen]) slen++;
+                if (zero_pad) {
+                    for (int i = slen; i < width; i++) sink_putc(&sink, '0');
+                }
                 sink_puts(&sink, buf);
                 break;
             }

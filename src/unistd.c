@@ -87,3 +87,11 @@ int reboot(void) {
 int shutdown(void) {
     return (int)_syscall0(SYS_SHUTDOWN);
 }
+
+int gethostname(char *buf, size_t size) {
+    return (int)_syscall2(SYS_GETHOSTNAME, (long)buf, (long)size);
+}
+
+int sethostname(const char *name, size_t len) {
+    return (int)_syscall2(SYS_SETHOSTNAME, (long)name, (long)len);
+}

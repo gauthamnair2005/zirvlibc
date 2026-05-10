@@ -20,6 +20,8 @@
 #define SYS_GETDENTS   78
 #define SYS_GETCWD     79
 #define SYS_CHDIR      80
+#define SYS_GETHOSTNAME 89
+#define SYS_SETHOSTNAME 90
 #define SYS_GETDATETIME 96
 #define SYS_SETDATETIME 97
 #define SYS_GETTZ       98

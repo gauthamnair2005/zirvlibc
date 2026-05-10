@@ -23,6 +23,8 @@ int munmap(void *addr, size_t length);
 uint64_t uptime(void);
 int reboot(void);
 int shutdown(void);
+int gethostname(char *buf, size_t size);
+int sethostname(const char *name, size_t len);
 
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2

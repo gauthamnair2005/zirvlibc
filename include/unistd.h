@@ -25,6 +25,10 @@ int reboot(void);
 int shutdown(void);
 int gethostname(char *buf, size_t size);
 int sethostname(const char *name, size_t len);
+int mkdir(const char *path);
+int rmdir(const char *path);
+int unlink(const char *path);
+int rename(const char *oldpath, const char *newpath);
 
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2

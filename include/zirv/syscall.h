@@ -20,6 +20,10 @@
 #define SYS_GETDENTS   78
 #define SYS_GETCWD     79
 #define SYS_CHDIR      80
+#define SYS_MKDIR      83
+#define SYS_RMDIR      84
+#define SYS_UNLINK     85
+#define SYS_RENAME     86
 #define SYS_GETHOSTNAME 89
 #define SYS_SETHOSTNAME 90
 #define SYS_GETDATETIME 96
@@ -28,6 +32,9 @@
 #define SYS_SETTZ       99
 #define SYS_REBOOT     100
 #define SYS_SHUTDOWN   101
+
+/* ── Open flags ──────────────────────────────────────────────────────────── */
+#define O_CREAT  0x40
 
 /* ── Standard I/O FDs ────────────────────────────────────────────────────── */
 #define STDIN_FILENO  0

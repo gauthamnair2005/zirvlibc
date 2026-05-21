@@ -35,6 +35,21 @@ int rename(const char *oldpath, const char *newpath);
  * Returns the IP in host byte order on success, 0 on failure. */
 uint32_t dns_lookup(const char *domain);
 
+/* PCI: read device info by index.  Returns 0 on success, -1 at end. */
+#include <stdint.h>
+typedef struct {
+    uint16_t vendor_id, device_id;
+    uint16_t subsys_vendor, subsys_device;
+    uint8_t  bus, dev, func;
+    uint8_t  class_code, subclass, prog_if, revision;
+    uint8_t  irq_line;
+    uint8_t  _pad;
+    uint64_t bar0_addr, bar0_size;
+    uint64_t bar2_addr, bar2_size;
+    char     driver_name[32];
+} pci_dev_info_t;
+int pci_read(uint32_t index, pci_dev_info_t *info);
+
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2
 #define PROT_EXEC   0x4

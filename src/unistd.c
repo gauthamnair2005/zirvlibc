@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <zirv/syscall.h>
 #include <stddef.h>
 #include <dirent.h>
@@ -116,4 +117,8 @@ uint32_t dns_lookup(const char *domain) {
     uint32_t ip = 0;
     int ret = (int)_syscall2(SYS_DNS_LOOKUP, (long)domain, (long)&ip);
     return ret == 0 ? ip : 0;
+}
+
+int pci_read(uint32_t index, pci_dev_info_t *info) {
+    return (int)_syscall2(SYS_PCI_READ, (long)index, (long)info);
 }

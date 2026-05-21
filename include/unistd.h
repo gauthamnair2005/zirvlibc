@@ -2,6 +2,7 @@
 #define ZIRVLIBC_UNISTD_H
 
 #include <stddef.h>
+#include <stdint.h>
 #include <zirv/syscall.h>
 #include <dirent.h>
 #include <datetime.h>
@@ -29,6 +30,10 @@ int mkdir(const char *path);
 int rmdir(const char *path);
 int unlink(const char *path);
 int rename(const char *oldpath, const char *newpath);
+
+/* DNS: resolve a domain name to an IPv4 address.
+ * Returns the IP in host byte order on success, 0 on failure. */
+uint32_t dns_lookup(const char *domain);
 
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2

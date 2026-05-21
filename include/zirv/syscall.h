@@ -32,6 +32,7 @@
 #define SYS_SETTZ       99
 #define SYS_REBOOT     100
 #define SYS_SHUTDOWN   101
+#define SYS_DNS_LOOKUP 102
 
 /* ── Open flags ──────────────────────────────────────────────────────────── */
 #define O_CREAT  0x40

@@ -111,3 +111,9 @@ int unlink(const char *path) {
 int rename(const char *oldpath, const char *newpath) {
     return (int)_syscall2(SYS_RENAME, (long)oldpath, (long)newpath);
 }
+
+uint32_t dns_lookup(const char *domain) {
+    uint32_t ip = 0;
+    int ret = (int)_syscall2(SYS_DNS_LOOKUP, (long)domain, (long)&ip);
+    return ret == 0 ? ip : 0;
+}

@@ -95,3 +95,19 @@ int gethostname(char *buf, size_t size) {
 int sethostname(const char *name, size_t len) {
     return (int)_syscall2(SYS_SETHOSTNAME, (long)name, (long)len);
 }
+
+int mkdir(const char *path) {
+    return (int)_syscall1(SYS_MKDIR, (long)path);
+}
+
+int rmdir(const char *path) {
+    return (int)_syscall1(SYS_RMDIR, (long)path);
+}
+
+int unlink(const char *path) {
+    return (int)_syscall1(SYS_UNLINK, (long)path);
+}
+
+int rename(const char *oldpath, const char *newpath) {
+    return (int)_syscall2(SYS_RENAME, (long)oldpath, (long)newpath);
+}

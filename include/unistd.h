@@ -22,6 +22,7 @@ int getdents(int fd, struct dirent *ents, int count);
 long mmap(void *addr, size_t length, int prot, int flags, int fd, long offset);
 int munmap(void *addr, size_t length);
 uint64_t uptime(void);
+void    msleep(uint64_t ms);
 int reboot(void);
 int shutdown(void);
 int gethostname(char *buf, size_t size);

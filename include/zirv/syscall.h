@@ -34,6 +34,7 @@
 #define SYS_SHUTDOWN   101
 #define SYS_DNS_LOOKUP 102
 #define SYS_PCI_READ  103
+#define SYS_MSLEEP    124
 
 /* ── Open flags ──────────────────────────────────────────────────────────── */
 #define O_CREAT  0x40

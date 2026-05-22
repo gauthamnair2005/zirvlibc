@@ -53,6 +53,10 @@ uint64_t uptime(void) {
     return (uint64_t)_syscall0(SYS_UPTIME);
 }
 
+void msleep(uint64_t ms) {
+    _syscall1(SYS_MSLEEP, (long)ms);
+}
+
 int getpid(void) {
     return (int)_syscall0(SYS_GETPID);
 }

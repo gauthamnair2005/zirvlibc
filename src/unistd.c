@@ -138,3 +138,11 @@ int dup2(int oldfd, int newfd) {
 int read_keys(key_event_t *ev) {
     return (int)_syscall1(SYS_READ_KEYS, (long)ev);
 }
+
+int audio_play(const void *buf, unsigned int frames) {
+    return (int)_syscall2(SYS_AUDIO_PLAY, (long)buf, (long)frames);
+}
+
+int audio_volume(unsigned char vol) {
+    return (int)_syscall1(SYS_AUDIO_VOLUME, (long)(unsigned int)vol);
+}

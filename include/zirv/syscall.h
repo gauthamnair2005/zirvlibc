@@ -37,6 +37,8 @@
 #define SYS_PCI_READ  103
 #define SYS_MSLEEP    124
 #define SYS_READ_KEYS 125
+#define SYS_AUDIO_PLAY   126
+#define SYS_AUDIO_VOLUME 127
 
 /* ── Open flags ──────────────────────────────────────────────────────────── */
 #define O_CREAT  0x40

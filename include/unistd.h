@@ -61,6 +61,9 @@ int pipe(int fds[2]);
 int dup2(int oldfd, int newfd);
 int read_keys(key_event_t *ev);
 
+int audio_play(const void *buf, unsigned int frames);
+int audio_volume(unsigned char vol);
+
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2
 #define PROT_EXEC   0x4

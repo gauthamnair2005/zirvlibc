@@ -126,3 +126,15 @@ uint32_t dns_lookup(const char *domain) {
 int pci_read(uint32_t index, pci_dev_info_t *info) {
     return (int)_syscall2(SYS_PCI_READ, (long)index, (long)info);
 }
+
+int pipe(int fds[2]) {
+    return (int)_syscall1(SYS_PIPE, (long)fds);
+}
+
+int dup2(int oldfd, int newfd) {
+    return (int)_syscall2(SYS_DUP2, oldfd, newfd);
+}
+
+int read_keys(key_event_t *ev) {
+    return (int)_syscall1(SYS_READ_KEYS, (long)ev);
+}

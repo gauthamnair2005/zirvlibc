@@ -8,6 +8,7 @@
 #define SYS_WRITE    1
 #define SYS_OPEN     2
 #define SYS_CLOSE    3
+#define SYS_DUP2    33
 #define SYS_MMAP     9
 #define SYS_MUNMAP   11
 #define SYS_BRK      12
@@ -35,6 +36,7 @@
 #define SYS_DNS_LOOKUP 102
 #define SYS_PCI_READ  103
 #define SYS_MSLEEP    124
+#define SYS_READ_KEYS 125
 
 /* ── Open flags ──────────────────────────────────────────────────────────── */
 #define O_CREAT  0x40

@@ -4,6 +4,13 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <zirv/syscall.h>
+
+/* ── Keyboard event ─────────────────────────────────────────────────────── */
+typedef struct {
+    uint16_t keycode;
+    uint8_t  pressed;   /* 0 = released, 1 = pressed */
+    uint8_t  mods;
+} key_event_t;
 #include <dirent.h>
 #include <datetime.h>
 
@@ -50,6 +57,9 @@ typedef struct {
     char     driver_name[32];
 } pci_dev_info_t;
 int pci_read(uint32_t index, pci_dev_info_t *info);
+int pipe(int fds[2]);
+int dup2(int oldfd, int newfd);
+int read_keys(key_event_t *ev);
 
 #define PROT_READ   0x1
 #define PROT_WRITE  0x2

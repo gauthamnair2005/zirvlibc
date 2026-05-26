@@ -43,6 +43,10 @@ int rename(const char *oldpath, const char *newpath);
  * Returns the IP in host byte order on success, 0 on failure. */
 uint32_t dns_lookup(const char *domain);
 
+/* Resolve a target IP to a MAC address (handles routing through gateway).
+ * Returns 0 on success, -1 on failure. */
+int net_resolve(uint32_t target_ip, uint8_t *mac_out);
+
 /* PCI: read device info by index.  Returns 0 on success, -1 at end. */
 #include <stdint.h>
 typedef struct {

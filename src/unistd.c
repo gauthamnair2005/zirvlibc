@@ -123,6 +123,10 @@ uint32_t dns_lookup(const char *domain) {
     return ret == 0 ? ip : 0;
 }
 
+int net_resolve(uint32_t target_ip, uint8_t *mac_out) {
+    return (int)_syscall2(SYS_NET_RESOLVE, (long)target_ip, (long)mac_out);
+}
+
 int pci_read(uint32_t index, pci_dev_info_t *info) {
     return (int)_syscall2(SYS_PCI_READ, (long)index, (long)info);
 }

@@ -35,6 +35,7 @@
 #define SYS_SHUTDOWN   101
 #define SYS_DNS_LOOKUP 102
 #define SYS_PCI_READ  103
+#define SYS_NET_RESOLVE 104
 #define SYS_MSLEEP    124
 #define SYS_READ_KEYS 125
 #define SYS_AUDIO_PLAY   126

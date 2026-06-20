@@ -77,4 +77,9 @@ int audio_volume(unsigned char vol);
 #define MAP_ANONYMOUS   0x20
 #define MAP_FAILED      ((void *)-1)
 
+/* ── ZirvFS snapshot operations ─────────────────────────────────────────--- */
+int zirvfs_snap_create(unsigned int fs_index, const char *message, uint64_t *snap_id);
+int zirvfs_snap_list(unsigned int fs_index, zirvfs_snapshot_info_t *snaps, uint32_t *count);
+int zirvfs_snap_restore(unsigned int fs_index, uint64_t snap_id);
+
 #endif

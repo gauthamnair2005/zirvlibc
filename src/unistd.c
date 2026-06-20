@@ -150,3 +150,15 @@ int audio_play(const void *buf, unsigned int frames) {
 int audio_volume(unsigned char vol) {
     return (int)_syscall1(SYS_AUDIO_VOLUME, (long)(unsigned int)vol);
 }
+
+int zirvfs_snap_create(unsigned int fs_index, const char *message, uint64_t *snap_id) {
+    return (int)_syscall3(SYS_ZIRVFS_SNAP_CREATE, (long)fs_index, (long)message, (long)snap_id);
+}
+
+int zirvfs_snap_list(unsigned int fs_index, zirvfs_snapshot_info_t *snaps, uint32_t *count) {
+    return (int)_syscall3(SYS_ZIRVFS_SNAP_LIST, (long)fs_index, (long)snaps, (long)count);
+}
+
+int zirvfs_snap_restore(unsigned int fs_index, uint64_t snap_id) {
+    return (int)_syscall2(SYS_ZIRVFS_SNAP_RESTORE, (long)fs_index, (long)snap_id);
+}

@@ -49,6 +49,19 @@
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
 
+/* ── ZirvFS snapshot syscalls ────────────────────────────────────────────── */
+#define SYS_ZIRVFS_SNAP_CREATE   152
+#define SYS_ZIRVFS_SNAP_LIST     153
+#define SYS_ZIRVFS_SNAP_RESTORE  154
+
+/* ── Snapshot info struct (must match kernel's zirvfs_snapshot_info_t) ───── */
+typedef struct {
+    uint64_t id;
+    uint64_t timestamp;
+    char     message[256];
+    unsigned char commit_hash[32];
+} __attribute__((packed)) zirvfs_snapshot_info_t;
+
 /* ── Error codes ─────────────────────────────────────────────────────────── */
 #define ENOENT   2
 #define EBADF    9
